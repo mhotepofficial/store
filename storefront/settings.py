@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: True,
+}
 
 # Application definition
 
@@ -40,7 +43,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'store',
     'tags',
-    'likes'
+    'playground',
+    'likes',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +84,12 @@ WSGI_APPLICATION = 'storefront.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'store',
+        'USER': 'store_user',
+        'PASSWORD': 'store',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

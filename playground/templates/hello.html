@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+    <h1>Hello, {{ name }}!</h1> 
+    <ul>
+        {% for order in orders %}
+        <li>{{ order.customer.first_name }}</li>
+        <p>Price: {{ order.orderItem_set.product.title }}</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
