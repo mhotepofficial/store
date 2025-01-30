@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import MinValueValidator
 
 class Pormotion(models.Model):
     description = models.TextField(max_length=255)
@@ -8,7 +8,8 @@ class Pormotion(models.Model):
 
 class Collection(models.Model):
     title = models.CharField(max_length=255)
-    featured_product = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True, related_name='+')
+    featured_product = models.ForeignKey(
+        'Product', on_delete=models.SET_NULL, null=True, related_name='+')
 
     def __str__(self):
         return self.title
@@ -19,13 +20,16 @@ class Collection(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=225)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     slug = models.SlugField()
-    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
-    inventroy = models.IntegerField()
+    unit_price = models.DecimalField(
+        max_digits=6, decimal_places=2,
+        validators=[MinValueValidator(1)]
+        )
+    inventroy = models.IntegerField(validators=[MinValueValidator(1)])
     last_update = models.DateTimeField(auto_now=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
-    pormotion = models.ManyToManyField(Pormotion)
+    pormotion = models.ManyToManyField(Pormotion, blank=True)
 
     def __str__(self):
         return self.title
