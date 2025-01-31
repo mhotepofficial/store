@@ -1,4 +1,4 @@
-#!/mnt/c/Users/hp/Desktop/code/store/store_venv/bin/python3
+#!/mnt/c/Users/hp/Desktop/code/store/store_venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
